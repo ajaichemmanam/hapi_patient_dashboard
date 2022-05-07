@@ -1,17 +1,16 @@
 # hapi_patient_dashboard
 
-A Brief Introduction to FHIR
+The objective of this UI is to display a list of patients from the FHIR server.
+View/ Update the patient information.
+Support searching by patient name.
 
-### FHIR
+### FHIR - A Brief Introduction
 
 As a healthcare organization, a lot of our work deals with storing and analyzing complex healthcare data. For this, we depend on the [FHIR](https://www.hl7.org/fhir/) standard. FHIR (Fast Health Interoperability Resources) is an HL7 specification for Healthcare Interoperability.
-
-What does that mean to you right now? Probably not too much (unless it does, in which case bonus points for you). That being said, it's a long, relatively complicated set of documentation to read and learn, so for the sake of our technical test we are going to focus on one small part; the [patient](https://www.hl7.org/fhir/patient.html) object.
 
 ### FHIR Patient documentation
 
 To make REST calls, you can start with:
-
 GET http://hapi.fhir.org/baseDstu3/Patient?_format=json&name:missing=false&birthdate:missing=false
 
 ### Screenshots
