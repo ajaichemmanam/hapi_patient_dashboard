@@ -17,7 +17,7 @@ function Dashboard() {
 
 
     return (
-        <div>
+        <div data-testid="dashboard">
             <NavigationBar />
             <PatientTable patientList={patientList} />
         </div>
