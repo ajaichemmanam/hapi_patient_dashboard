@@ -2,18 +2,15 @@ import { React, useEffect, useState } from 'react';
 
 
 function PatentModal(props) {
-    const [nameValue, setNameValue] = useState(props.patient ? props.patient.resource.name[0].given[0] : "");
-    const [dobValue, setDobValue] = useState(props.patient ? props.patient.resource.birthDate : "");
-    const [genderValue, setGenderValue] = useState(props.patient ? props.patient.resource.gender : "");
+    const [nameValue, setNameValue] = useState("");
+    const [dobValue, setDobValue] = useState("");
+    const [genderValue, setGenderValue] = useState("male");
 
     useEffect(() => {
         console.log("props.patient", props.patient)
-        if (props.patient != null) {
-
-            setNameValue(props.patient.resource.name[0].given[0])
-            setDobValue(props.patient.resource.birthDate)
-            setGenderValue(props.patient.resource.gender)
-        }
+            setNameValue(props.patient? props.patient.resource.name[0].given[0]: "")
+            setDobValue(props.patient? props.patient.resource.birthDate:"")
+            setGenderValue(props.patient?props.patient.resource.gender:"male")
     }, [props.patient]);
 
     return (

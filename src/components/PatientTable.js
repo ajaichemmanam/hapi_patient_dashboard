@@ -36,22 +36,44 @@ function PatientTable(props) {
 
     const handleModalClose = () => {
         setShowModal(false);
+        setSelectedPatient(null);
     }
 
     const handleSave = (patient, updatedPatientData) => {
         console.log(patient)
         console.log(updatedPatientData)
 
-        let resource = patient.resource
-        resource.name[0].given[0] = updatedPatientData.name
-        resource.birthDate = updatedPatientData.dob
-        resource.gender = updatedPatientData.gender
+        if (patient === null) {
+            console.log("creating")
+            let resource = {
+                "resourceType": "Patient",
+                "name": [{
+                    "given": [`${updatedPatientData.name}`],
+                }],
+                "gender": `${updatedPatientData.gender}`,
+                "birthDate": `${updatedPatientData.dob}`
+            }
+            endpoints.createPatient(resource).then(res => {
+                console.log(res)
+            });
+
+        }
+
+        else {
+            console.log("updating")
+
+            let resource = patient.resource
+            resource.name[0].given[0] = updatedPatientData.name
+            resource.birthDate = updatedPatientData.dob
+            resource.gender = updatedPatientData.gender
 
 
 
-        endpoints.updatePatient(patient.resource.id, resource).then(res => {
-            console.log(res.data);
-        });
+            endpoints.updatePatient(patient.resource.id, resource).then(res => {
+                console.log(res.data);
+            });
+        }
+
 
         setShowModal(false);
         setSelectedPatient(null);
@@ -124,8 +146,6 @@ function PatientTable(props) {
                                                 // Add patientImage to patient object
                                                 const patientImage = patient.resource.gender === "male" ? "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80";
                                                 patient.patientImage = patientImage;
-
-
                                                 setSelectedPatient(patient);
 
                                                 setShowModal(true)
