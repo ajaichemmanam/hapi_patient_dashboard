@@ -1,6 +1,7 @@
 import { React } from "react";
 import { useEffect, useState } from "react";
 import PatentModal from "../components/PatentModal";
+import endpoints from "../connection/endpoints";
 function PatientTable(props) {
 
     const [patientList, setPatientList] = useState([]);
@@ -41,7 +42,16 @@ function PatientTable(props) {
         console.log(patient)
         console.log(updatedPatientData)
 
-        // 
+        let resource = patient.resource
+        resource.name[0].given[0] = updatedPatientData.name
+        resource.birthDate = updatedPatientData.dob
+        resource.gender = updatedPatientData.gender
+
+
+
+        endpoints.updatePatient(patient.resource.id, resource).then(res => {
+            console.log(res.data);
+        });
 
         setShowModal(false);
         setSelectedPatient(null);

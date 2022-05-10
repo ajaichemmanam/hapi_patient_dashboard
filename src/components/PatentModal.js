@@ -1,10 +1,20 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 
 
 function PatentModal(props) {
     const [nameValue, setNameValue] = useState(props.patient ? props.patient.resource.name[0].given[0] : "");
     const [dobValue, setDobValue] = useState(props.patient ? props.patient.resource.birthDate : "");
     const [genderValue, setGenderValue] = useState(props.patient ? props.patient.resource.gender : "");
+
+    useEffect(() => {
+        console.log("props.patient",props.patient)
+        if (props.patient != null){
+
+            setNameValue(props.patient.resource.name[0].given[0])
+            setDobValue(props.patient.resource.birthDate)
+            setGenderValue(props.patient.resource.gender)
+        }
+      }, [props.patient]);
 
     return (
         props.isOpen ?
@@ -19,7 +29,7 @@ function PatentModal(props) {
                             <label for="gender" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Gender</label>
                             <div className="relative mb-5 mt-2">
 
-                                <select className='mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border' onChange={(e) => { setGenderValue(e.target.value) }}>
+                                <select className='mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border' onChange={(e) => { setGenderValue(e.target.value) }} value={genderValue}>
                                     <option value="male">Male</option>
                                     <option value="female" >Female</option>
                                     <option value="other" >Other</option>
@@ -39,7 +49,7 @@ function PatentModal(props) {
                                         <rect x="8" y="15" width="2" height="2" />
                                     </svg>
                                 </div>
-                                <input id="expiry" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border datepicker" placeholder="DD/MM/YYYY" value={dobValue} onChange={(e) => { setDobValue(e.target.value) }} />
+                                <input id="expiry" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border datepicker" placeholder="YYYY-MM-DD" value={dobValue} onChange={(e) => { setDobValue(e.target.value) }} />
                             </div>
                             <div className="flex items-center justify-start w-full">
                                 <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" onClick={() => {
