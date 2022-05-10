@@ -7,14 +7,14 @@ function PatentModal(props) {
     const [genderValue, setGenderValue] = useState(props.patient ? props.patient.resource.gender : "");
 
     useEffect(() => {
-        console.log("props.patient",props.patient)
-        if (props.patient != null){
+        console.log("props.patient", props.patient)
+        if (props.patient != null) {
 
             setNameValue(props.patient.resource.name[0].given[0])
             setDobValue(props.patient.resource.birthDate)
             setGenderValue(props.patient.resource.gender)
         }
-      }, [props.patient]);
+    }, [props.patient]);
 
     return (
         props.isOpen ?
