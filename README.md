@@ -13,6 +13,10 @@ As a healthcare organization, a lot of our work deals with storing and analyzing
 To make REST calls, you can start with:
 GET http://hapi.fhir.org/baseDstu3/Patient?_format=json&name:missing=false&birthdate:missing=false
 
+Add the following in a .env file
+
+`DATABASE_ENDPOINT="https://hapi.fhir.org"`
+
 ### Screenshots
 
 ![screen1](https://raw.githubusercontent.com/ajaichemmanam/hapi_patient_dashboard/main/screenshots/main.png)
